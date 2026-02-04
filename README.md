@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RedEYE Android Device Monitoring Dashboard
 
-## Getting Started
+A professional, real-time monitoring and management dashboard for Android device fleets. Built for high performance, visual excellence, and complete backend flexibility.
 
-First, run the development server:
+![RedEYE Login](file:///C:/Users/Shilley%20Pc/.gemini/antigravity/brain/0531b662-739c-474f-be41-054e46e641b4/uploaded_media_1770155494541.png)
 
+## 🚀 Features
+
+- **Real-time Monitoring**: Live status updates (battery, network, signal) via Socket.io.
+- **SMS Stream**: Production-grade virtualized message stream handling thousands of messages per device.
+- **Advanced Auth**: Multi-step login with 2FA (Telegram OTP & Google Authenticator) and secure signed session management.
+- **Admin Panel**: Complete user management, role assignments, and device fleet control.
+- **Deterministic Mocking**: Full development lifecycle support without backend dependency using a built-in mock server and data seeder.
+- **Responsive Design**: Premium dark-mode UI built with Tailwind CSS and Framer Motion for smooth interactions.
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion.
+- **State Management**: TanStack Query (React Query) for efficient caching and synchronization.
+- **Real-time**: Socket.io-client for bi-directional live updates.
+- **Security**: `jose` for signed JWT sessions, `httpOnly` cookies for secure state persistence.
+- **UI Components**: Radix UI primitives and Lucide React icons.
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/DigitalExpart/RedEye-Dashboard.git
+   cd RedEye-Dashboard
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment**:
+   Copy the example environment file and adjust the values (the defaults are optimized for mock mode):
+   ```bash
+   cp .env.example .env.local
+   ```
+
+### Running the Project
+
+#### Development (Mock Mode)
+This runs the Next.js dashboard and a mock Socket.io server concurrently. No real backend is required.
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+- **Web App**: [http://localhost:3000](http://localhost:3000)
+- **Socket Server**: `http://localhost:4001` (Auto-started)
+
+#### Production Build
+```bash
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔐 Mock Credentials
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Use these accounts to test the dashboard in Mock Mode:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Account Type | Username | Password | 2FA Required |
+|--------------|----------|----------|--------------|
+| **Admin**    | `admin`  | `admin123` | Yes (`123456`) |
+| **User**     | `user`   | `user123`  | Yes (`123456`) |
+| **Demo**     | `demo`   | `demo123`  | No (Direct)   |
 
-## Learn More
+> [!TIP]
+> Use the **demo** account for the fastest testing, as it skips the 2FA step.
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗 Swappable Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project is designed to be backend-agnostic. To transition to a real production backend:
+1. Update `NEXT_PUBLIC_USE_MOCKS=false` in `.env.local`.
+2. Set `NEXT_PUBLIC_API_BASE_URL` to your production API.
+3. The `apiClient` in `src/lib/api/client.ts` will automatically switch from local route handlers to your production endpoint.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```bash
+src/
+├── app/             # Next.js routes and layout
+├── components/      # Reusable UI components
+├── lib/             # API client, config, and utilities
+├── mocks/           # Deterministic data store and seeders
+├── providers/       # Context providers (Auth, Query, Toast)
+├── types/           # Strict TypeScript contracts
+scripts/             # Mock Socket.io server implementation
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+This project is proprietary. Please refer to delivery terms.
